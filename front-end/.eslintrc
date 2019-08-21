@@ -1,0 +1,22 @@
+{
+  "extends": ["airbnb", "eslint-config-prettier"],
+
+  "parser": "babel-eslint",
+  "env": {
+    "browser": true,
+    "jest": true,
+    "es6": true
+  },
+  "rules": {
+    "no-alert": 0,
+    "no-console": "warn",
+    "class-methods-use-this": "off",
+    "react/jsx-filename-extension": 0,
+    "import/no-extraneous-dependencies": 0,
+    "import/prefer-default-export": 0
+  },
+  "globals": {
+    "window": true,
+    "document": true
+  }
+}
