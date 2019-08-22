@@ -7,7 +7,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "lint": "eslint .",
+    "lint": "eslint './src/**/*.js'",
     "lint:css": "stylelint './src/**/*.js' --fix"
   },
   "dependencies": {
@@ -23,6 +23,7 @@
     "eslint": "^6.2.1",
     "eslint-config-airbnb": "^18.0.1",
     "eslint-config-prettier": "^6.1.0",
+    "eslint-config-react": "^1.1.7",
     "eslint-plugin-import": "^2.18.2",
     "eslint-plugin-jsx-a11y": "^6.2.3",
     "eslint-plugin-prettier": "^3.1.0",
@@ -35,9 +36,6 @@
     "stylelint-config-recommended": "^2.2.0",
     "stylelint-config-styled-components": "^0.1.1",
     "stylelint-processor-styled-components": "^1.8.0"
-  },
-  "eslintConfig": {
-    "extends": "react-app"
   },
   "browserslist": {
     "production": [
@@ -59,8 +57,8 @@
   "lint-staged": {
     "*.{js,jsx}": [
       "pretty-quick --staged",
-      "stylelint './src/**/*.js",
-      "eslint ./src/ --fix",
+      "stylelint './src/**/*.js'",
+      "eslint './src/**/*.js' --fix",
       "git add"
     ]
   }
