@@ -1,3 +1,4 @@
+// TODO: Use JSON data instead, then we can use fetch...
 export const countries = [
   {
     code: 'AD',

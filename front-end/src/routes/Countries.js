@@ -16,18 +16,29 @@ import { Link } from 'react-router-dom';
 //      code
 //      name
 //  }
-const CountryList = () => {
-  return (
-    <div>
-      <h1>Countries</h1>
+class Countries extends React.Component {
+  // state = {
+  //   isLoaded: false,
+  //   countries: [],
+  // };
 
-      <ul>
-        <li>
-          <Link to="/">{'< Back'}</Link>
-        </li>
-      </ul>
-    </div>
-  );
-};
+  componentDidMount() {
+    // TODO: fetch API data
+  }
 
-export default CountryList;
+  render() {
+    return (
+      <div>
+        <h1>Countries Route</h1>
+
+        <ul>
+          <li>
+            <Link to="/">{'< Back'}</Link>
+          </li>
+        </ul>
+      </div>
+    );
+  }
+}
+
+export default Countries;
