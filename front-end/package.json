@@ -7,7 +7,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "lint": "eslint './src/**/*.js'",
+    "lint": "eslint . --fix",
     "lint:css": "stylelint './src/**/*.js' --fix"
   },
   "dependencies": {
@@ -58,7 +58,7 @@
     "*.{js,jsx}": [
       "pretty-quick --staged",
       "stylelint './src/**/*.js'",
-      "eslint './src/**/*.js' --fix",
+      "eslint . --fix",
       "git add"
     ]
   }
