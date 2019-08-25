@@ -1,5 +1,5 @@
 {
-  "extends": ["airbnb", "prettier", "prettier/react"],
+  "extends": ["airbnb", "react-app", "prettier", "prettier/react"],
   "plugins": ["prettier"],
   "parser": "babel-eslint",
   "parserOptions": {
@@ -17,6 +17,7 @@
   "rules": {
     "no-alert": 0,
     "no-console": "warn",
+    "no-shadow": "off",
     "class-methods-use-this": "off",
     "import/no-extraneous-dependencies": 0,
     "import/prefer-default-export": 0,
