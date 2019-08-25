@@ -3,19 +3,22 @@ import styled from 'styled-components';
 
 const TitleH1 = styled.h1`
   font-size: 4em;
+  margin: 0;
   padding: 0.25em;
   color: ${props => props.theme.colors.primaryText};
   text-align: ${props => (props.center ? 'center' : 'left')};
 `;
 const TitleH2 = styled.h2`
   font-size: 3em;
+  margin: 0;
   padding: 0.25em;
   color: ${props => props.theme.colors.black};
   text-align: ${props => (props.center ? 'center' : 'left')};
 `;
 const SubTitle = styled.h3`
   font-size: 1em;
-  color: ${props => (props.color ? props.color : props.theme.colors.coolGrey)};
+  color: ${props =>
+    props.color ? props.color : props.theme.colors.secondaryLightMagenta};
   text-align: ${props => (props.center ? 'center' : 'left')};
 `;
 const SubTitleInline = styled.span`
