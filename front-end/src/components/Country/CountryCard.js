@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import { renderLanguages } from '../../utils/renderLanguages';
+import { renderLanguages } from '../../utils';
 import { CardTitle } from '../Text';
 
 const CardLink = styled(Link)`
