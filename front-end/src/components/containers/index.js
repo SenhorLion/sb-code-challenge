@@ -12,6 +12,7 @@ export const HeaderDiv = styled.div`
   justify-content: center;
   align-content: left;
   padding: 1em;
+  margin-bottom: 2em;
 `;
 
 export const ErrorDiv = styled.div`
