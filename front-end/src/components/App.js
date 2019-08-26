@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 import Routes from '../routes';
-import { TitleH1 } from './Text';
 
 const AppDiv = styled.div`
   display: flex;
@@ -16,7 +15,6 @@ const AppDiv = styled.div`
 const App = () => {
   return (
     <AppDiv className="app">
-      <TitleH1 center>Countries List</TitleH1>
       <Routes />
     </AppDiv>
   );
