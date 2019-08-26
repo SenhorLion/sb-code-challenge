@@ -2,28 +2,45 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import { renderLanguages } from '../../utils';
-import { TitleH2, SubTitleInline } from '../Text/index';
+import { SubTitleInline } from '../Text/index';
+import {
+  CardContainer,
+  CardIcon,
+  CardContent,
+  CardTitle,
+  CardInfo,
+  Row,
+  RowTitle,
+  RowValue,
+} from './Card';
 
-/**
- * Display the currency and a area code (phone) of that country..
- *
- */
 const CountryDetailCard = ({ country }) => {
   return (
-    <div>
-      <TitleH2>
-        <span>{country.emoji}</span>
-        {country.name} <SubTitleInline>({country.native})</SubTitleInline>
-      </TitleH2>
-      <h2>Currency: </h2>
-      <p>{country.currency}</p>
-      <h2>Area code: </h2>
-      <p>{country.phone}</p>
-      <div>
-        <h2>Languages spoken:</h2>
-        {renderLanguages(country.languages)}
-      </div>
-    </div>
+    <CardContainer>
+      <CardIcon>{country.emoji}</CardIcon>
+      <CardContent>
+        <CardTitle>
+          {country.name} <SubTitleInline>({country.native})</SubTitleInline>
+        </CardTitle>
+
+        <CardInfo>
+          <Row>
+            <RowTitle>Currency:</RowTitle>
+            <RowValue>{country.currency}</RowValue>
+          </Row>
+
+          <Row>
+            <RowTitle>Area code:</RowTitle>
+            <RowValue>{country.phone}</RowValue>
+          </Row>
+
+          <Row>
+            <RowTitle>Languages:</RowTitle>
+            <RowValue>{renderLanguages(country.languages)}</RowValue>
+          </Row>
+        </CardInfo>
+      </CardContent>
+    </CardContainer>
   );
 };
 
