@@ -36,7 +36,12 @@ const Country = ({ code }) => {
       <Query query={GET_COUNTRY} variables={{ code }}>
         {({ loading, error, data }) => {
           if (loading) return <Loader text="Loading" />;
-          if (error) return <ErrorDiv>{error.message}</ErrorDiv>;
+          if (error)
+            return (
+              <ErrorDiv>
+                <p>{error.message}</p>
+              </ErrorDiv>
+            );
           return <CountryDetailCard country={data.country} />;
         }}
       </Query>

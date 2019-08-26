@@ -22,6 +22,5 @@ export const ErrorDiv = styled.div`
   padding: 0.5em;
   color: ${props => props.theme.colors.secondaryMagenta};
   justify-content: center;
-  align-items: center;
-  align-content: center;
+  align-items: flex-start;
 `;
