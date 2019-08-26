@@ -7,8 +7,7 @@ const AppDiv = styled.div`
   flex: 1;
   flex-direction: column;
   min-width: 100vw;
-  /* color: ${props => props.theme.colors.lightBlue}; */
-  background-color: white; 
+  background-color: white;
   justify-content: center;
 `;
 
