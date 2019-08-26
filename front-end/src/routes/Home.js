@@ -38,7 +38,7 @@ const Home = () => {
         <span>— Pitbull</span>
       </Quote>
       <StyledDiv>
-        <Button primary to="/countries">
+        <Button primary="true" to="/countries">
           View Countries
         </Button>
       </StyledDiv>
