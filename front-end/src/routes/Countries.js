@@ -40,7 +40,7 @@ const Countries = () => {
 
       <Query query={GET_COUNTRIES}>
         {({ loading, error, data }) => {
-          if (loading) return <Loader text="Loading countries..." />;
+          if (loading) return <Loader text="Loading countries" />;
           if (error)
             return (
               <ErrorDiv>
