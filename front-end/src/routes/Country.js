@@ -1,11 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
 import { Query } from 'react-apollo';
 import gql from 'graphql-tag';
 import { Loader } from '../components/Loader';
 import { ContainerDiv, ErrorDiv, HeaderDiv } from '../components/containers';
-import { SubTitle } from '../components/Text';
+import { TitleH1 } from '../components/Text';
+import { BackButton } from '../components/Buttons';
 import { CountryDetailCard } from '../components/Country';
 
 const GET_COUNTRY = gql`
@@ -28,18 +28,14 @@ const GET_COUNTRY = gql`
 const Country = ({ code }) => {
   return (
     <ContainerDiv>
+      <TitleH1 center>Country Detail</TitleH1>
       <HeaderDiv>
-        <Link to="/countries">{'< Back'}</Link>
+        <BackButton to="/countries">{'< Back'}</BackButton>
       </HeaderDiv>
 
       <Query query={GET_COUNTRY} variables={{ code }}>
         {({ loading, error, data }) => {
-          if (loading)
-            return (
-              <Loader>
-                <SubTitle>Loading</SubTitle>
-              </Loader>
-            );
+          if (loading) return <Loader text="Loading" />;
           if (error) return <ErrorDiv>{error.message}</ErrorDiv>;
           return <CountryDetailCard country={data.country} />;
         }}

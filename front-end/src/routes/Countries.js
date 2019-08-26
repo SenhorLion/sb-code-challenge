@@ -1,12 +1,11 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-
 import { Query } from 'react-apollo';
 import gql from 'graphql-tag';
 import { ContainerDiv, HeaderDiv } from '../components/containers';
 import { Loader } from '../components/Loader';
 import CountryList from '../components/Country/CountryList';
-import { SubTitle } from '../components/Text';
+import { TitleH1 } from '../components/Text';
+import { BackButton } from '../components/Buttons';
 
 const GET_COUNTRIES = gql`
   {
@@ -34,18 +33,14 @@ const GET_COUNTRIES = gql`
 const Countries = () => {
   return (
     <ContainerDiv>
+      <TitleH1 center>Countries List</TitleH1>
       <HeaderDiv>
-        <Link to="/">{'< Back'}</Link>
+        <BackButton to="/">{'< Back'}</BackButton>
       </HeaderDiv>
 
       <Query query={GET_COUNTRIES}>
         {({ loading, error, data }) => {
-          if (loading)
-            return (
-              <Loader>
-                <SubTitle>Loading</SubTitle>
-              </Loader>
-            );
+          if (loading) return <Loader text="Loading countries..." />;
           if (error) return <p>{error.message}</p>;
           return <CountryList countries={data.countries} />;
         }}

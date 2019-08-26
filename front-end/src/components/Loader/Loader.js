@@ -11,25 +11,28 @@ const LoaderDiv = styled.div`
   align-self: center;
   align-items: center;
 `;
+const LoadingText = styled.h3`
+  font-size: 1em;
+  color: ${props =>
+    props.color ? props.color : props.theme.colors.secondaryLightMagenta};
+  text-align: ${props => (props.center ? 'center' : 'left')};
+`;
 
-const Loader = ({ children, theme }) => {
+const Loader = ({ text, theme }) => {
   return (
     <LoaderDiv>
       <Loading type="spokes" color={theme.colors.secondaryLightMagenta} />
-      {children}
+      {text && <LoadingText>{text}</LoadingText>}
     </LoaderDiv>
   );
 };
 
 Loader.defaultProps = {
-  children: '',
+  text: '',
 };
 
 Loader.propTypes = {
-  children: PropTypes.oneOfType([
-    PropTypes.arrayOf(PropTypes.node),
-    PropTypes.string,
-  ]),
+  text: PropTypes.string,
   theme: PropTypes.PropTypes.shape({
     colors: PropTypes.objectOf(PropTypes.string),
   }).isRequired,

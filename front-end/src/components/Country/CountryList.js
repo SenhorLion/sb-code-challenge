@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import sortBy from 'lodash/sortBy';
-import styled from 'styled-components';
+import styled, { withTheme } from 'styled-components';
 import { ErrorDiv } from '../containers';
-import { TitleH2, SubTitle } from '../Text';
+import { TitleH2 } from '../Text';
 import CountryCard from './CountryCard';
 import FilterCountryLinks from './FilterCountryLinks';
 import { Loader } from '../Loader';
@@ -20,11 +20,21 @@ const StyledDiv = styled.div`
 `;
 
 const BackToTop = styled.a`
-  display: flex;
+  display: block;
   font-size: 1em;
-  color: ${props => props.theme.colors.coolGrey};
+  color: ${props => props.theme.colors.primaryCyan};
   text-align: ${props => (props.center ? 'center' : 'left')};
   padding: 1em;
+  text-decoration: none;
+
+  &:visited {
+    color: ${props => props.theme.colors.primaryCyan};
+    text-decoration: none;
+  }
+  &:hover {
+    color: ${props => props.theme.colors.primaryDarkCyan};
+    text-decoration: underline;
+  }
 `;
 
 class CountryList extends React.Component {
@@ -80,10 +90,14 @@ class CountryList extends React.Component {
 
   renderCountries = country => {
     const { title, data } = country;
+    const { theme } = this.props;
+    const {
+      colors: { secondaryMagenta },
+    } = theme;
 
     return (
       <StyledDiv key={title}>
-        <TitleH2 id={title} center>
+        <TitleH2 color={secondaryMagenta} id={title} center>
           {title}
         </TitleH2>
         <BackToTop href="#top">Back to top</BackToTop>
@@ -98,9 +112,7 @@ class CountryList extends React.Component {
     const { countries, isLoading, error } = this.state;
 
     return isLoading ? (
-      <Loader>
-        <SubTitle>Parsing data...</SubTitle>
-      </Loader>
+      <Loader text="Parsing data..." />
     ) : (
       <div>
         {error && (
@@ -108,6 +120,7 @@ class CountryList extends React.Component {
             <p>{error}</p>
           </ErrorDiv>
         )}
+        {this.renderFilterLinks(countries)}
         {countries.map(this.renderCountries)}
       </div>
     );
@@ -128,4 +141,4 @@ CountryList.propTypes = {
   }).isRequired,
 };
 
-export default CountryList;
+export default withTheme(CountryList);
