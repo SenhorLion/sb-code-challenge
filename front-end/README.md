@@ -25,6 +25,32 @@ Instructions:
 6. Routes must be fully loadable with a direct link. `/countries/CI` must render the page for Ivory Coast, for example.
 7. End.
 
+## Candidate Implementation:
+
+**Tech Used:**
+
+- React (create-react-app), React Router, Styled-Components, GraphQL, Apollo.
+- _Code Quality:_ Eslint, Prettier, StyleLint, Husky.
+- _Theme_: `postcss-normalize` was used to implement a normalise reset and a basic theme was implemented using styled-components to create a clean interface.
+
+**Usage:**
+
+- Install dependencies `yarn install`.
+- Start app in browser: `yarn start`.
+- For development you can run the linters:
+  `yarn lint` - for eslint.
+  `yarn lint:css` to use stylint to lint the css.
+
+_NB: Husky is configured to lint any staged code on commit_.
+
+**Features:**
+
+- `http://localhost:3000/` - Displays a landing page with a link to the countries route.
+- `http://localhost:3000/countries` - Makes a request to the GraphQL API and, if succesful, renders the returned list of countries.
+- Countries are displayed in a alphabetised sectioned list, to make it slightly easier to navigate the country data.
+- `http://localhost:3000/countries/:code` - Makes a request to the GraphQL API for a particular country using the country code supplied and, if successful, renders the returned country data.
+- Routes are fully loadable with a direct link, for example, entering `http://localhost:3000/countries/pt` in the browsers address bar will request and display data for Portugal.
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
