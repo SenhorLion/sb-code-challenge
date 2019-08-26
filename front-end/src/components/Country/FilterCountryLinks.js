@@ -6,18 +6,19 @@ import { FilterLink, SubTitle } from '../Text';
 const FilterLinkDiv = styled.div`
   display: flex;
   flex: 1;
-  flex-direction: column;
-  border: 1px solid ${props => props.theme.colors.lightBlue};
+  flex-direction: row;
+  border: 1px solid ${props => props.theme.colors.lightGrey};
   margin-top: 1em;
   padding: 0.5em;
   /* color: ${props => props.theme.colors.lightBlue}; */
-  justify-content: center;
-`;
+  /* justify-content: center; */
+  
+  `;
 const CenterDiv = styled.div`
-  display: flex;
   flex: 1;
   align-self: center;
-  align-content: center;
+  align-items: center;
+  margin-left: 1em;
 `;
 
 // TODO: For small screen use a dropdown list
