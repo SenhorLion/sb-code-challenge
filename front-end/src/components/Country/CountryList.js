@@ -128,14 +128,16 @@ class CountryList extends React.Component {
 }
 
 CountryList.propTypes = {
-  countries: PropTypes.shape({
-    name: PropTypes.string.isRequired,
-    native: PropTypes.string.isRequired,
-    currency: PropTypes.string.isRequired,
-    phone: PropTypes.string.isRequired,
-    languages: PropTypes.array.isRequired,
-    emoji: PropTypes.string.isRequired,
-  }).isRequired,
+  countries: PropTypes.arrayOf(
+    PropTypes.shape({
+      code: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
+      native: PropTypes.string.isRequired,
+      continent: PropTypes.object.isRequired,
+      languages: PropTypes.array.isRequired,
+      emoji: PropTypes.string.isRequired,
+    })
+  ).isRequired,
   theme: PropTypes.PropTypes.shape({
     colors: PropTypes.objectOf(PropTypes.string),
   }).isRequired,
