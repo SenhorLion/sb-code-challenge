@@ -12,13 +12,13 @@ const TitleH2 = styled.h2`
   font-size: 3em;
   margin: 0;
   padding: 0.25em;
-  color: ${props => props.theme.colors.black};
+  color: ${props => (props.color ? props.color : props.theme.colors.coolGrey)};
   text-align: ${props => (props.center ? 'center' : 'left')};
 `;
 const SubTitle = styled.h3`
   font-size: 1em;
   color: ${props =>
-    props.color ? props.color : props.theme.colors.secondaryLightMagenta};
+    props.color ? props.color : props.theme.colors.primaryCyan};
   text-align: ${props => (props.center ? 'center' : 'left')};
 `;
 const SubTitleInline = styled.span`
@@ -27,12 +27,14 @@ const SubTitleInline = styled.span`
   text-align: ${props => (props.center ? 'center' : 'left')};
 `;
 const Code = styled.code`
-  color: ${props => props.theme.colors.secondaryMagenta};
-`;
-const CardTitle = styled.h1`
-  font-size: 2em;
-  color: ${props => props.theme.colors.black};
-  text-align: ${props => (props.center ? 'center' : 'left')};
+  color: ${props => props.theme.colors.primaryCyan};
+  font-weight: 700;
+  padding-bottom: 0.75em;
+
+  span {
+    font-weight: 400;
+    color: ${props => props.theme.colors.coolGrey};
+  }
 `;
 
 const StyledLink = styled(Link)`
@@ -59,7 +61,6 @@ export {
   TitleH2,
   SubTitle,
   SubTitleInline,
-  CardTitle,
   StyledLink,
   FilterLink,
   Code,
