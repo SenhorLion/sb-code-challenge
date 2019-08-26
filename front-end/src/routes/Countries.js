@@ -5,7 +5,7 @@ import { ContainerDiv, HeaderDiv, ErrorDiv } from '../components/Containers';
 import { Loader } from '../components/Loader';
 import CountryList from '../components/Country/CountryList';
 import { TitleH1 } from '../components/Text';
-import { BackButton } from '../components/Buttons';
+import { BackButton, Button } from '../components/Buttons';
 
 const GET_COUNTRIES = gql`
   {
@@ -45,6 +45,9 @@ const Countries = () => {
             return (
               <ErrorDiv>
                 <p>{error.message}</p>
+                <p>
+                  <Button to="/">Click here to try again</Button>
+                </p>
               </ErrorDiv>
             );
           return <CountryList countries={data.countries} />;

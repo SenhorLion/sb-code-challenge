@@ -5,7 +5,7 @@ import gql from 'graphql-tag';
 import { Loader } from '../components/Loader';
 import { ContainerDiv, ErrorDiv, HeaderDiv } from '../components/Containers';
 import { TitleH1 } from '../components/Text';
-import { BackButton } from '../components/Buttons';
+import { BackButton, Button } from '../components/Buttons';
 import { CountryDetailCard } from '../components/Country';
 
 const GET_COUNTRY = gql`
@@ -40,6 +40,9 @@ const Country = ({ code }) => {
             return (
               <ErrorDiv>
                 <p>{error.message}</p>
+                <p>
+                  <Button to="/countries">Click here to try again</Button>
+                </p>
               </ErrorDiv>
             );
           return <CountryDetailCard country={data.country} />;

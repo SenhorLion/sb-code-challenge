@@ -21,6 +21,7 @@ export const ErrorDiv = styled.div`
   border: 0px solid ${props => props.theme.colors.black};
   padding: 0.5em;
   color: ${props => props.theme.colors.secondaryMagenta};
-  justify-content: center;
-  align-items: flex-start;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
 `;
