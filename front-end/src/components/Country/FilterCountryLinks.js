@@ -28,7 +28,9 @@ const FilterCountryLinks = ({ countries = [], color }) => {
       <SubTitle color={color}>Quick links:</SubTitle>
       <CenterDiv>
         {countries.map(country => (
-          <FilterLink href={`#${country.title}`}>{country.title}</FilterLink>
+          <FilterLink key={country.title} href={`#${country.title}`}>
+            {country.title}
+          </FilterLink>
         ))}
       </CenterDiv>
     </FilterLinkDiv>
