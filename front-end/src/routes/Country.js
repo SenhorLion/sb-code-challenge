@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Query } from 'react-apollo';
 import gql from 'graphql-tag';
 import { Loader } from '../components/Loader';
-import { ContainerDiv, ErrorDiv, HeaderDiv } from '../components/containers';
+import { ContainerDiv, ErrorDiv, HeaderDiv } from '../components/Containers';
 import { TitleH1 } from '../components/Text';
 import { BackButton } from '../components/Buttons';
 import { CountryDetailCard } from '../components/Country';

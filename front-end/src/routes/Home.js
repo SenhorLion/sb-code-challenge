@@ -1,15 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Button } from '../components/Buttons';
-import { TitleH1 } from '../components/Text';
-
-const ContainerDiv = styled.div`
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-  max-width: 100vw;
-  background-color: white;
-`;
+import { TitleH1, SubTitle } from '../components/Text';
+import { ContainerDiv } from '../components/Containers';
 
 const StyledDiv = styled.div`
   display: flex;
@@ -19,11 +12,10 @@ const StyledDiv = styled.div`
   align-items: center;
 `;
 
-const Quote = styled.code`
+const Quote = styled(SubTitle)`
   font-size: 1.75em;
   color: ${props => props.theme.colors.secondaryLightMagenta};
   font-weight: 600;
-  text-align: center;
   padding: 2em;
 
   span {
@@ -40,7 +32,7 @@ const Home = () => {
   return (
     <ContainerDiv>
       <TitleH1 center>Countries List</TitleH1>
-      <Quote>
+      <Quote center>
         {`"Reach for the stars, and if you don't grab 'em, at least you'll fall on
         top of the world"`}
         <span>— Pitbull</span>

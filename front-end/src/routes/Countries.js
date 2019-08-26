@@ -1,7 +1,7 @@
 import React from 'react';
 import { Query } from 'react-apollo';
 import gql from 'graphql-tag';
-import { ContainerDiv, HeaderDiv } from '../components/containers';
+import { ContainerDiv, HeaderDiv } from '../components/Containers';
 import { Loader } from '../components/Loader';
 import CountryList from '../components/Country/CountryList';
 import { TitleH1 } from '../components/Text';

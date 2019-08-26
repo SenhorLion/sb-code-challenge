@@ -2,13 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import sortBy from 'lodash/sortBy';
 import styled, { withTheme } from 'styled-components';
-import { ErrorDiv } from '../containers';
+import { ErrorDiv } from '../Containers';
 import { TitleH2 } from '../Text';
 import CountryCard from './CountryCard';
 import FilterCountryLinks from './FilterCountryLinks';
 import { Loader } from '../Loader';
 
-const StyledDiv = styled.div`
+const ContryContainer = styled.div`
   flex: 1;
   border: 0px solid ${props => props.theme.colors.black};
   margin-bottom: 6px;
@@ -96,7 +96,7 @@ class CountryList extends React.Component {
     } = theme;
 
     return (
-      <StyledDiv key={title}>
+      <ContryContainer key={title}>
         <TitleH2 color={secondaryMagenta} id={title} center>
           {title}
         </TitleH2>
@@ -104,7 +104,7 @@ class CountryList extends React.Component {
         {data.map(item => {
           return <CountryCard key={item.code} country={item} />;
         })}
-      </StyledDiv>
+      </ContryContainer>
     );
   };
 
