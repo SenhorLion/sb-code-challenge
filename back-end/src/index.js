@@ -93,6 +93,13 @@ const movies = [
         country: 'England, UK',
       },
     ],
+    directors: [
+      {
+        name: 'Mr Director',
+        birthday: 'Jan 1, 1960',
+        country: 'England, UK',
+      },
+    ],
   },
 ];
 
@@ -112,12 +119,19 @@ const schema = gql`
     country: String!
   }
 
+  type Director {
+    name: String!
+    birthday: String!
+    country: String!
+  }
+
   type Movie {
     id: ID!
     title: String!
     year: String!
     rating: Int!
     actors: [Actor]
+    directors: [Director]
   }
 `;
 
