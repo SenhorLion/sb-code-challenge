@@ -2,32 +2,14 @@ import 'dotenv/config';
 
 import express from 'express';
 import { ApolloServer, gql } from 'apollo-server-express';
-
+import uuidv4 from 'uuid/v4';
+import jwt from 'jsonwebtoken';
 const apiPort = process.env.API_PORT || 8000;
 const app = express();
 
 // TODO: Create basic data to fulfill requirements
 // : Add:
 /*
-```graphql
-{
-  movies {
-    title
-    year
-    rating
-    actors {
-      name
-      birthday
-      country
-      directors {
-        name
-        birthday
-        country
-      }
-    }
-  }
-}
-```
 
 4. Add support for the following mutation:
 ```graphql
@@ -103,14 +85,28 @@ const movies = [
   },
 ];
 
+const users = {
+  1: {
+    id: '1',
+    username: 'Lionel',
+    email: 'lion@dot.com',
+    password: 'superSecret',
+  },
+};
+
 const schema = gql`
   type Query {
     me: User
+    user(id: ID!): User
+    users: [User!]
     movies: [Movie!]
   }
 
   type User {
+    id: ID!
     username: String!
+    password: String!
+    email: String!
   }
 
   type Actor {
@@ -133,17 +129,62 @@ const schema = gql`
     actors: [Actor]
     directors: [Director]
   }
+  type Token {
+    token: String!
+  }
+
+  type Mutation {
+    createUser(username: String!, email: String!, password: String!): User!
+    signup(username: String!, email: String!, password: String!): Token!
+  }
 `;
+const createToken = async ({ id, password }) => {
+  const token = jwt.sign({ id }, password);
+  console.log('@createToken', { id }, { token });
+
+  return token;
+};
 
 const resolvers = {
   Query: {
-    me: () => {
-      return {
-        username: 'Lionel',
-      };
+    me: (parent, args, { me }) => me,
+    user: (parent, { id }) => {
+      return users[id];
     },
+    users: () => Object.values(users),
     movies: () => {
       return movies;
+    },
+  },
+  Mutation: {
+    createUser: (parent, { username, email, password }, context) => {
+      const id = uuidv4();
+      const token = jwt.sign({ id }, password);
+      console.log({ id });
+      console.log({ token });
+
+      const user = {
+        id,
+        username,
+        password,
+        email,
+      };
+      users[id] = user;
+
+      return user;
+    },
+    signup: (parent, { username, email, password }, context) => {
+      const id = uuidv4();
+      // TODO: Hash Password with Bcrypt
+      const user = {
+        id,
+        username,
+        password,
+        email,
+      };
+      users[id] = user;
+
+      return { token: createToken(user) };
     },
   },
 };
@@ -151,6 +192,9 @@ const resolvers = {
 const server = new ApolloServer({
   typeDefs: schema,
   resolvers,
+  context: {
+    me: users[1],
+  },
 });
 
 server.applyMiddleware({ app, path: '/graphql' });
