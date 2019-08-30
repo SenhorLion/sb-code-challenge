@@ -74,12 +74,17 @@ const movies = [
         birthday: 'July 10, 1977',
         country: 'England, UK',
       },
+      {
+        name: 'James Earl Jones',
+        birthday: 'January 17, 1931',
+        country: 'England, UK',
+      },
     ],
     directors: [
       {
-        name: 'Mr Director',
-        birthday: 'Jan 1, 1960',
-        country: 'England, UK',
+        name: 'Jon Favreau',
+        birthday: 'October 19, 1966',
+        country: 'New York, USA',
       },
     ],
   },
@@ -89,7 +94,7 @@ const users = {
   1: {
     id: '1',
     username: 'Lionel',
-    email: 'lion@dot.com',
+    email: 'lion@me.com',
     password: 'superSecret',
   },
 };
