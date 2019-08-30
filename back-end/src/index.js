@@ -4,6 +4,8 @@ import express from 'express';
 import { ApolloServer, gql } from 'apollo-server-express';
 import uuidv4 from 'uuid/v4';
 import jwt from 'jsonwebtoken';
+import bcrypt from 'bcrypt';
+
 const apiPort = process.env.API_PORT || 8000;
 const app = express();
 
@@ -143,11 +145,17 @@ const schema = gql`
     signup(username: String!, email: String!, password: String!): Token!
   }
 `;
-const createToken = async ({ id, password }) => {
-  const token = jwt.sign({ id }, password);
-  console.log('@createToken', { id }, { token });
+const createToken = async (user, secret, expiresIn) => {
+  const { id, email, username } = user;
+
+  const token = await jwt.sign({ id, email, username }, secret, { expiresIn });
 
   return token;
+};
+
+const generatePasswordHash = async password => {
+  const saltRounds = 10;
+  return await bcrypt.hash(password, saltRounds);
 };
 
 const resolvers = {
@@ -163,11 +171,6 @@ const resolvers = {
   },
   Mutation: {
     createUser: (parent, { username, email, password }, context) => {
-      const id = uuidv4();
-      const token = jwt.sign({ id }, password);
-      console.log({ id });
-      console.log({ token });
-
       const user = {
         id,
         username,
@@ -178,18 +181,19 @@ const resolvers = {
 
       return user;
     },
-    signup: (parent, { username, email, password }, context) => {
+    signup: async (parent, { username, email, password }, { secret }) => {
       const id = uuidv4();
-      // TODO: Hash Password with Bcrypt
+      const passwordHashed = await generatePasswordHash(password);
       const user = {
         id,
         username,
-        password,
         email,
+        password: passwordHashed,
       };
       users[id] = user;
 
-      return { token: createToken(user) };
+      // create a jwt using the user, secret and 30minute expiry time
+      return { token: createToken(user, secret, '30m') };
     },
   },
 };
@@ -199,6 +203,7 @@ const server = new ApolloServer({
   resolvers,
   context: {
     me: users[1],
+    secret: process.env.TOKEN_SECRET,
   },
 });
 
