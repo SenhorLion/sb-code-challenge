@@ -10,61 +10,7 @@ import bcrypt from 'bcrypt';
 const apiPort = process.env.API_PORT || 8000;
 const app = express();
 
-// TODO: Create basic data to fulfill requirements
-// : Add:
-/*
-
-4. Add support for the following mutation:
-```graphql
-mutation createUser($username: String, $password: String) {
-  createUser(username: $username, password: $password) {
-    token
-    user {
-      id
-      name
-    }
-  }
-}
-```
-
-5. To expand on the number four, add a mutation-based authentication that accepts:
-```graphql
-mutation login($username: String, $password: String) {
-  login(username: $username, password: $password) {
-    token
-    user {
-      id
-      name
-    }
-  }
-}
-```
-
-6. Authenticated users may request additional fields for the query used earlier. New `scoutbase_rating` field must return the a random string between 5.0-9.0:
-
-```graphql
-{
-  movies {
-    scoutbase_rating
-    title
-    year
-    rating
-    actors {
-      name
-      birthday
-      country
-      directors {
-        name
-        birthday
-        country
-      }
-    }
-  }
-}
-```
-*/
-
-// TODO: Data hardcoded, could come from Rest API
+// Hard coded data
 const movies = [
   {
     id: 1,
@@ -102,6 +48,8 @@ const users = {
   },
 };
 
+// Schema: Types, Queries, Mutations
+// TODO: Utilize schema stitching to help modularise based on domain
 const schema = gql`
   type Query {
     me: User
@@ -147,6 +95,8 @@ const schema = gql`
     signin(email: String!, password: String!): Token!
   }
 `;
+
+// Helper functions:
 const createToken = async (user, secret, expiresIn) => {
   const { id, email, username } = user;
 
@@ -164,6 +114,7 @@ const validatePassword = async (user, password) => {
   return await bcrypt.compare(password, user.password);
 };
 
+// Resolvers:
 const resolvers = {
   Query: {
     me: (parent, args, { me }) => me,
