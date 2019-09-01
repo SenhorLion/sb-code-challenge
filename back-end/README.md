@@ -29,6 +29,7 @@ Instructions:
 ```
 
 4. Add support for the following mutation:
+
 ```graphql
 mutation createUser($username: String, $password: String) {
   createUser(username: $username, password: $password) {
@@ -42,6 +43,7 @@ mutation createUser($username: String, $password: String) {
 ```
 
 5. To expand on the number four, add a mutation-based authentication that accepts:
+
 ```graphql
 mutation login($username: String, $password: String) {
   login(username: $username, password: $password) {
@@ -81,3 +83,11 @@ mutation login($username: String, $password: String) {
 7. `/graphql` must be accessible for external clients.
 
 8. End.
+
+---
+
+## My Implementation:
+
+**Please note, I have only completed this exercise for fun, curiosity and more learning!**
+
+As a candidate I completed/submitted the front-end challenge.
