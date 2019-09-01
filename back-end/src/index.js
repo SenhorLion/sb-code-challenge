@@ -2,6 +2,7 @@ import 'dotenv/config';
 
 import express from 'express';
 import { ApolloServer, gql } from 'apollo-server-express';
+import { AuthenticationError, UserInputError } from 'apollo-server';
 import uuidv4 from 'uuid/v4';
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
@@ -143,6 +144,7 @@ const schema = gql`
   type Mutation {
     createUser(username: String!, email: String!, password: String!): User!
     signup(username: String!, email: String!, password: String!): Token!
+    signin(email: String!, password: String!): Token!
   }
 `;
 const createToken = async (user, secret, expiresIn) => {
@@ -156,6 +158,10 @@ const createToken = async (user, secret, expiresIn) => {
 const generatePasswordHash = async password => {
   const saltRounds = 10;
   return await bcrypt.hash(password, saltRounds);
+};
+
+const validatePassword = async (user, password) => {
+  return await bcrypt.compare(password, user.password);
 };
 
 const resolvers = {
@@ -191,6 +197,27 @@ const resolvers = {
         password: passwordHashed,
       };
       users[id] = user;
+
+      // create a jwt using the user, secret and 30minute expiry time
+      return { token: createToken(user, secret, '30m') };
+    },
+
+    signin: async (parent, { email, password }, { secret }) => {
+      const usersValues = Object.values(users);
+
+      const user = usersValues.find(u => u.email === email);
+
+      console.log({ user });
+
+      if (!user) {
+        throw new UserInputError('No user found');
+      }
+
+      const isValid = await validatePassword(user, password);
+
+      if (!isValid) {
+        throw new AuthenticationError('Invalid login credentials');
+      }
 
       // create a jwt using the user, secret and 30minute expiry time
       return { token: createToken(user, secret, '30m') };
