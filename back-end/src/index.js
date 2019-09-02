@@ -1,8 +1,8 @@
 import 'dotenv/config';
 
 import express from 'express';
-import { ApolloServer, gql } from 'apollo-server-express';
-import { AuthenticationError, UserInputError } from 'apollo-server';
+import { ApolloServer, AuthenticationError, gql } from 'apollo-server-express';
+import { UserInputError, ForbiddenError } from 'apollo-server';
 import uuidv4 from 'uuid/v4';
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
@@ -114,6 +114,23 @@ const validatePassword = async (user, password) => {
   return await bcrypt.compare(password, user.password);
 };
 
+const getMe = async req => {
+  const token = req.headers['x-token'];
+
+  console.log('HEADERS', req.headers, { token });
+
+  if (token) {
+    try {
+      const verifiedToken = await jwt.verify(token, process.env.TOKEN_SECRET);
+      console.log({ verifiedToken });
+
+      return verifiedToken;
+    } catch (error) {
+      console.log({ error });
+      throw new AuthenticationError('Your session expired, please login again');
+    }
+  }
+};
 // Resolvers:
 const resolvers = {
   Query: {
@@ -179,9 +196,12 @@ const resolvers = {
 const server = new ApolloServer({
   typeDefs: schema,
   resolvers,
-  context: {
-    me: users[1],
-    secret: process.env.TOKEN_SECRET,
+  context: async ({ req }) => {
+    const me = await getMe(req);
+    return {
+      me,
+      secret: process.env.TOKEN_SECRET,
+    };
   },
 });
 
